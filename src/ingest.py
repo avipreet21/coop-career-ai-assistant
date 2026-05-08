@@ -48,7 +48,7 @@ for file in RAW_DATA.rglob("*.*"):
     Documents.append(document)
 
 # Save the extracted text to a JSON file
-with open(OUTPUT_DATA / "documents.json", "w") as file:
+with open(OUTPUT_DATA / "documents.jsonl", "w") as file:
     for doc in Documents:
         json.dump(doc, file)
         file.write("\n")
