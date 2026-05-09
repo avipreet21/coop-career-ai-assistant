@@ -14,7 +14,7 @@ def search_documents(query, document):
     results.sort(key=lambda x: x["score"], reverse=True)
     return results
 
-def load_documents():
+def load_documents(Data_file):
     with open(Data_file, "r", encoding="utf-8") as file:
         documents = [json.loads(line) for line in file]
 

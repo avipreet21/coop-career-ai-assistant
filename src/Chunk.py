@@ -7,6 +7,7 @@ OUTPUT_FILE = Path("data/processed/chunks.jsonl")
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
 
+Data_file = Path("data/processed/documents.jsonl")
 
 def split_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
 
@@ -28,7 +29,7 @@ def split_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
 
 def create_chunks():
 
-    documents = load_documents()
+    documents = load_documents(Data_file)
 
     all_chunks = []
 

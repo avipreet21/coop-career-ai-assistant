@@ -1,5 +1,6 @@
+from pathlib import Path
+from src.search import load_documents
 import streamlit as st
-from src.search import search_documents, load_documents
 
 
 st.set_page_config(page_title="Ai Co op Career intelligence assistance", layout="wide")
@@ -10,7 +11,7 @@ st.write(
     "Search co-op reports, company advice, interview tips, and student experiences."
 )
 
-document = load_documents()
+document = load_documents(Data_file=Path("data/processed/documents.jsonl"))
 
 query = st.text_input("Enter your search query:")
 
