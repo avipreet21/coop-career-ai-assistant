@@ -14,8 +14,11 @@ def search_documents(query, document):
     results.sort(key=lambda x: x["score"], reverse=True)
     return results
 
-with open(Data_file / "documents.jsonl", "r") as file:
-    document = [json.loads(line) for line in file]
+def load_documents():
+    with open(Data_file, "r", encoding="utf-8") as file:
+        documents = [json.loads(line) for line in file]
+
+    return documents
 
 
 query = input("Enter your search query: ")
