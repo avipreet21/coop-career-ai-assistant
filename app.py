@@ -1,5 +1,5 @@
 import streamlit as st
-from src.semantic_search import semantic_search
+from src.rag_answers import generate_answer
 
 st.set_page_config(
     page_title="AI Co-op Career Intelligence Assistant",
@@ -9,23 +9,24 @@ st.set_page_config(
 st.title("AI Co-op Career Intelligence Assistant")
 
 st.write(
-    "Semantic search across co-op reports, company advice, interview tips, and student experiences."
+    "Ask questions about co-op reports, company advice, interview tips, and student experiences."
 )
 
-query = st.text_input("Enter your search query:")
-top_k = st.slider("Number of results", 1, 10, 5)
+question = st.text_input("Ask a question:")
+top_k = st.slider("Number of sources to use", 1, 10, 5)
 
-if query:
-    results = semantic_search(query, top_k=top_k)
+if question:
+    with st.spinner("Searching documents and generating answer..."):
+        answer, sources = generate_answer(question, top_k=top_k)
 
-    st.subheader("Top Semantic Results")
+    st.subheader("AI Answer")
+    st.write(answer)
 
-    if not results:
-        st.warning("No results found.")
-    else:
-        for result in results:
-            st.markdown("---")
-            st.write(f"**File:** {result['file_name']}")
-            st.write(f"**Distance:** {result['score']}")
-            st.write(f"**Path:** `{result['path']}`")
-            st.write(result["text"][:1000])
+    st.subheader("Sources")
+
+    for source in sources:
+        st.markdown("---")
+        st.write(f"**File:** {source['file_name']}")
+        st.write(f"**Distance:** {source['score']}")
+        st.write(f"**Path:** `{source['path']}`")
+        st.write(source["text"][:800])
