@@ -166,6 +166,26 @@ project/
 
 ---
 
+# Using Your Own Documents
+
+Place your PDF or DOCX files inside:
+
+data/raw/
+
+Then run:
+
+python src/ingest.py
+python src/chunk.py
+python src/embed_chunks.py
+
+Finally launch:
+
+streamlit run app.py
+
+The system will build embeddings and allow semantic AI search over your own documents.
+
+---
+
 ## License
 
 This project is intended for educational and portfolio purposes.
