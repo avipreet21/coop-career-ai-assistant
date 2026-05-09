@@ -5,4 +5,4 @@ pandas
 sentence-transformers
 faiss-cpu
 python-dotenv
-opernai
+openai
