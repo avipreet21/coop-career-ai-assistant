@@ -10,6 +10,7 @@ What makes this project valuable is that the responses are grounded in real-worl
 
 This project was built from scratch to better understand the internal architecture behind modern AI retrieval systems instead of relying entirely on high-level AI frameworks.
 
+###The architecture is reusable across different document domains by replacing the source dataset
 
 ## Motivation
 
