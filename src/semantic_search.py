@@ -1,6 +1,6 @@
 import pickle
 from pathlib import Path
-
+import streamlit as st
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -10,7 +10,11 @@ METADATA_FILE = Path("data/processed/chunk_metadata.pkl")
 
 model_name = "all-MiniLM-L6-v2"
 
+@st.cache_resource
+def load_model():
+    return SentenceTransformer(model_name)
 
+@st.cache_resource
 def load_index_and_metadata():
     index = faiss.read_index(str(INDEX_FILE))
 
