@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from src.semantic_search import semantic_search
+from semantic_search import semantic_search
 
 load_dotenv()
 
