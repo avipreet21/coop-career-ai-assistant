@@ -1,34 +1,31 @@
-from pathlib import Path
-from src.search import load_documents
 import streamlit as st
+from src.semantic_search import semantic_search
 
-
-st.set_page_config(page_title="Ai Co op Career intelligence assistance", layout="wide")
-
-st.title("Ai Co op Career intelligence assistance")
-
-st.write(
-    "Search co-op reports, company advice, interview tips, and student experiences."
+st.set_page_config(
+    page_title="AI Co-op Career Intelligence Assistant",
+    layout="wide"
 )
 
-document = load_documents(Data_file=Path("data/processed/documents.jsonl"))
+st.title("AI Co-op Career Intelligence Assistant")
+
+st.write(
+    "Semantic search across co-op reports, company advice, interview tips, and student experiences."
+)
 
 query = st.text_input("Enter your search query:")
+top_k = st.slider("Number of results", 1, 10, 5)
 
 if query:
-    results = search_documents(query, document)
+    results = semantic_search(query, top_k=top_k)
 
-    st.subheader("Top Results")
+    st.subheader("Top Semantic Results")
 
     if not results:
         st.warning("No results found.")
     else:
-        for result in results[:5]:
-            doc = result["document"]
-
+        for result in results:
             st.markdown("---")
-            st.write(f"**File:** {doc['file_name']}")
-            st.write(f"**Score:** {result['score']}")
-            st.write(f"**Path:** `{doc['path']}`")
-            st.write(doc["text"][:500])
-            
+            st.write(f"**File:** {result['file_name']}")
+            st.write(f"**Distance:** {result['score']}")
+            st.write(f"**Path:** `{result['path']}`")
+            st.write(result["text"][:1000])
