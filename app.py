@@ -1,5 +1,6 @@
 import streamlit as st
-from src.search import search_documents
+from src.search import search_documents, load_documents
+
 
 st.set_page_config(page_title="Ai Co op Career intelligence assistance", layout="wide")
 
@@ -14,16 +15,19 @@ document = load_documents()
 query = st.text_input("Enter your search query:")
 
 if query:
-    results = search_documents(query, documents, top_k=5)
+    results = search_documents(query, document)
 
     st.subheader("Top Results")
 
     if not results:
         st.warning("No results found.")
     else:
-        for result in results:
+        for result in results[:5]:
+            doc = result["document"]
+
             st.markdown("---")
-            st.write(f"**File:** {result['file_name']}")
+            st.write(f"**File:** {doc['file_name']}")
             st.write(f"**Score:** {result['score']}")
-            st.write(f"**Path:** `{result['path']}`")
-            st.write(result["preview"])
+            st.write(f"**Path:** `{doc['path']}`")
+            st.write(doc["text"][:500])
+            

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-Data_file = Path("data/processed")
+Data_file = Path("data/processed/documents.jsonl")
 
 def search_documents(query, document):
     results = []
@@ -19,12 +19,3 @@ def load_documents():
         documents = [json.loads(line) for line in file]
 
     return documents
-
-
-query = input("Enter your search query: ")
-results = search_documents(query, document)
-if results:
-    print(f"Found {len(results)} matching documents:")
-    for result in results:
-        print(f"Document: {result['document']['file_name']}, Score: {result['score']}")
-
